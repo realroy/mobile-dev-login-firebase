@@ -1,5 +1,6 @@
 package com.example.loginfirebase
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +22,11 @@ class RecycleAdapter(private val items: ArrayList<Item>) : RecyclerView.Adapter<
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        @SuppressLint("SetTextI18n")
         fun bind(item: Item) {
             val nameTextView = itemView.findViewById<TextView>(R.id.nameTextView)
             val imageView = itemView.findViewById<ImageView>(R.id.imageView)
-            nameTextView.text = item.name + item.url
+            nameTextView.text = item.title + item.url
         }
     }
 }

@@ -91,21 +91,19 @@ class NewPostActivity : AppCompatActivity() {
     }
 
     private fun onUploadSuccess(t: UploadTask.TaskSnapshot) {
+        val urlTask = t.storage.downloadUrl
+        while(!urlTask.isSuccessful)
         progressDialog.setMessage("Add image path to database.")
-        databaseReference
+        val imageRef = databaseReference
             .child("users")
             .child(mAuth.currentUser?.uid.toString())
             .child("images")
-                
-            .push(t.metadata?.path)
-            .setValue(t.metadata?.path)
-            .addOnCompleteListener {
-                Toast.makeText(
-                    baseContext,
-                    "Image has uploaded successfully.",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
+
+        val key = databaseReference.push().key
+        val imageName = nameEditText.text.toString()
+        val ref = imageRef.child(key!!)
+        ref.child("title").setValue(imageName)
+        ref.child("url").setValue(urlTask.result.toString())
         progressDialog.dismiss()
     }
 
