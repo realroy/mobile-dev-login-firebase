@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 
 class RecycleAdapter(private val items: ArrayList<Item>) : RecyclerView.Adapter<RecycleAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,7 +27,9 @@ class RecycleAdapter(private val items: ArrayList<Item>) : RecyclerView.Adapter<
         fun bind(item: Item) {
             val nameTextView = itemView.findViewById<TextView>(R.id.nameTextView)
             val imageView = itemView.findViewById<ImageView>(R.id.imageView)
-            nameTextView.text = item.title + item.url
+            nameTextView.text = item.title
+            Glide.with(itemView).load(item.url).into(imageView)
+
         }
     }
 }

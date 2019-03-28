@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
@@ -45,24 +46,19 @@ class ViewPostsActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+
                 dataset = arrayListOf()
                 for (p in dataSnapshot.children) {
                     dataset.add(p.getValue(Item::class.java)!!)
                 }
                 recycleAdapter = RecycleAdapter(dataset)
                 recycleAdapter.notifyDataSetChanged()
-                Log.d("a", recycleAdapter.getItemId(0).toString())
                 recycleView.adapter = recycleAdapter
-                Log.d("b", "b")
             }
 
         })
 
 
-
-    }
-
-    fun fetch() {
 
     }
 
